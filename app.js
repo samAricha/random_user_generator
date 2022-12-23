@@ -1,13 +1,33 @@
+
+
 const app = Vue.createApp({
     
     data(){
          return {
-            firstName: 'Samson',
-            lastName: 'Aricha',
-            email: 'aricha@gmail.com',
-            gender: 'female',
+            firstName: 'Ephantus',
+            lastName: 'Njogu',
+            email: 'njogu@gmail.com',
+            gender: 'male',
             picture: 'https://randomuser.me/api/portraits/men/10.jpg',
          }
+    },
+    methods:{
+        async getUser(){
+          /*  this.firstName = 'Ephantus',
+            this.lastName  = 'Njogu',
+            this.email = 'njogu@gmail.com',
+            this.gender = 'female',
+            this.picture = 'https://randomuser.me/api/portraits/men/10.jpg'*/
+
+            const res = await fetch('https://randomuser.me/api')
+            const {results} = await res.json()
+            console.log(results)
+            this.firstName = results[0].name.first
+            this.lastName = results[0].name.last
+            this.email = results[0].email
+            this.gender = results[0].gender
+            this.picture = results[0].picture.large
+        },
     }
 })
 
